@@ -4,14 +4,51 @@ import { Input } from "./ui/input";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
+import { loginUser } from "@/queries/userQuery";
+import { useNavigate } from "@tanstack/react-router";
+import { useUserStore } from "@/store";
+import { jwtDecode } from "jwt-decode";
+import { toast } from "sonner";
+import Cookies from "js-cookie";
 
 export default function SigninFormComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const setUser = useUserStore((state) => state.setUser);
+  const navigate = useNavigate();
+
+  const loginQuery = useMutation({
+    mutationFn: loginUser,
+    onError: (err) => {
+      console.log("error:", err.message);
+      if (err.message === "User not found") {
+        toast.error("User not found");
+      } else if (err.message === "Invalid credentials") {
+        toast.error("Wrong credentials");
+      } else {
+        toast.error("Server error");
+      }
+    },
+    onSuccess: (data) => {
+      toast.success("User logged in successfully");
+      const accessToken = Cookies.get("accessToken");
+      console.log("token during login:", accessToken);
+      const userPayload = jwtDecode(accessToken);
+      setUser({
+        userId: userPayload.id,
+        userEmail: userPayload.email,
+        userFirstName: userPayload.firstName,
+        userLastName: userPayload.lastName,
+        userAvatarUrl: userPayload.avatarUrl,
+      });
+      navigate({ to: "/" });
+    },
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
+    loginQuery.mutate({ email, password });
   };
 
   return (

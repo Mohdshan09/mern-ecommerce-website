@@ -12,6 +12,8 @@ import {
 import { useState } from "react";
 import { Outlet } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
+import { useUserStore } from "@/store";
+import DropDownMenu from "./drop-down-menu-component";
 
 export function NavbarComponent() {
   const navItems = [
@@ -29,6 +31,8 @@ export function NavbarComponent() {
     },
   ];
 
+  const userId = useUserStore((state) => state.userId);
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -40,7 +44,11 @@ export function NavbarComponent() {
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
             <Link to="/auth/login">
-              <NavbarButton variant="primary">Login</NavbarButton>
+              {userId ? (
+                "user Data is present"
+              ) : (
+                <NavbarButton variant="primary">Login</NavbarButton>
+              )}
             </Link>
           </div>
         </NavBody>

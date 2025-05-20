@@ -4,6 +4,10 @@ import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import React, { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { toast } from "sonner";
+import { useNavigate } from "@tanstack/react-router";
+import { useMutation } from "@tanstack/react-query";
+import { registerUser } from "@/queries/userQuery";
 
 export default function SignupFormComponent() {
   const [firstName, setFirstName] = useState("");
@@ -11,8 +15,30 @@ export default function SignupFormComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
+  const registerQuery = useMutation({
+    mutationFn: registerUser,
+    onError: (err) => {
+      console.log("error:", err.message);
+      if (err.message === "Email already exists") {
+        toast.error("Email already exists");
+      } else if (err.message === "Bad request") {
+        toast.error("Client side error");
+      } else {
+        toast.error("Server error");
+      }
+    },
+    onSuccess: (data) => {
+      toast.success("User registered successfully");
+      toast.info("sign in to continue");
+      navigate({ to: "/auth/login" });
+    },
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    registerQuery.mutate({ firstName, lastName, email, password });
   };
 
   return (

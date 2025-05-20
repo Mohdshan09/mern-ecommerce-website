@@ -1,15 +1,13 @@
 import {
-  DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserPen } from "lucide-react";
 import { NavbarButton } from "./ui/resizable-navbar";
-import { useUserStore } from "@/store";
+// import { useUserStore } from "@/store";
 
 export default function DropDownMenu() {
   // const userAvatarUrl = useUserStore((state) => state.userAvatarUrl);
@@ -18,7 +16,7 @@ export default function DropDownMenu() {
       <DropDownMenu>
         <DropdownMenuTrigger>
           <Avatar>
-            {/* <AvatarImage src={userAvatarUrl || ""} /> */}
+            {/* <AvatarImage src={userAvatarUrl} /> */}
             <AvatarFallback>
               <UserPen />
             </AvatarFallback>
