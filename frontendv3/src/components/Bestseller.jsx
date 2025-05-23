@@ -5,13 +5,13 @@ import Title from "./Title";
 import ProductItems from "./ProductItems";
 
 const Bestseller = () => {
-  const { products } = useContext(ShopContext);
+  const { products} = useContext(ShopContext);
   const [Bestsellers, setBestSellers] = useState([]);
 
   useEffect(() => {
     const bestProducts = products.filter((item) => item.bestseller);
     setBestSellers(bestProducts.slice(0, 5));
-  }, []);
+  }, [products]);
   return (
     <div className="my-10">
       <div className="text-center text-3xl py-8">

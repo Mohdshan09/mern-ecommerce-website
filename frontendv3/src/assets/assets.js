@@ -22,6 +22,7 @@ import myimg21 from './19.jpg';
 import myimg22 from './22.jpg';
 import myimg23 from './23.png';
 import myimg24 from './24.jpg';
+import darkmode from './dark_mode.png';
 
 
 
@@ -109,6 +110,7 @@ import contact_img from './contact_img.png'
 import razorpay_logo from './razorpay_logo.png'
 import stripe_logo from './stripe_logo.png'
 import cross_icon from './cross_icon.png'
+import lightmode from './light_mode.png'
 
 
 export const assets = {
@@ -129,7 +131,9 @@ export const assets = {
     contact_img,
     razorpay_logo,
     stripe_logo,
-    cross_icon
+    cross_icon,
+    darkmode,
+    lightmode
 }
 
 export const products = [
