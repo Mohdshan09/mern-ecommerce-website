@@ -26,7 +26,7 @@ const loginUser = async (req, res) => {
     }
     catch (err) {
         console.error(err);
-        res.json({ success: false, message: error.message });
+        res.json({ success: false, message: err.message });
     }
 }
 
