@@ -5,10 +5,11 @@ import ProductItems from "./ProductItems";
 
 const Latescollection = () => {
   const { products } = useContext(ShopContext);
-  const [LatestProducts, setLastestProduct] = useState([]);
+  const [LatestProducts, setLatestProduct] = useState([]);
 
   useEffect(() => {
-    setLastestProduct(products.slice(0, 10));
+    setLatestProduct(products.slice(0, 10));
+    console.log(products)
   }, [products]);
 
   return (
@@ -27,7 +28,7 @@ const Latescollection = () => {
           <ProductItems
             key={index}
             id={item._id}
-            image={item.image}
+            image={item.images}
             name={item.name}
             price={item.price}
           />

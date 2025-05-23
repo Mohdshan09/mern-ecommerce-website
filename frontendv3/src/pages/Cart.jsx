@@ -5,7 +5,7 @@ import { assets } from "../assets/assets";
 import CartTotal from "../components/CartTotal";
 
 const Cart = () => {
-  const { products, cartItems, currency, updateQuantity,navigate} =
+  const { products, cartItems, currency, updateQuantity, navigate } =
     useContext(ShopContext);
   const [cartData, setcartData] = useState([]);
 
@@ -25,7 +25,11 @@ const Cart = () => {
     }
 
     setcartData(tempData);
-  }, [cartItems]);
+  }, [cartItems,products]);
+
+  if (!products || products.length === 0) {
+    return <p>Loading products...</p>;
+  }
   return (
     <div className="border-t pt-14">
       <div className="text-2xl mb-3">
@@ -46,7 +50,7 @@ const Cart = () => {
               <div className="flex items-start gap-6">
                 <img
                   className="w-16 sm:w-20"
-                  src={productData.image[0]}
+                  src={productData.images?.[0]}
                   alt=""
                 />
                 <div>
@@ -94,7 +98,12 @@ const Cart = () => {
           <CartTotal />
 
           <div className="w-full text-end">
-            <button onClick={()=>navigate('/place-order')} className="bg-black text-white text-sm my-8 px-8 py-3 cursor-pointer">PROCEED TO CHECKOUT</button>
+            <button
+              onClick={() => navigate("/place-order")}
+              className="bg-black text-white text-sm my-8 px-8 py-3 cursor-pointer"
+            >
+              PROCEED TO CHECKOUT
+            </button>
           </div>
         </div>
       </div>
