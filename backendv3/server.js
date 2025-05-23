@@ -7,25 +7,12 @@ import userRouter from './routes/userRoute.js'
 import productRouter from './routes/productRoute.js'
 import cartRouter from './routes/cartRoute.js'
 import orderRouter from './routes/orderRoute.js'
-import mongoose from 'mongoose'
 
 //App config
 const app = express()
 const port = process.env.PORT || 4000
-
-
-//                                      connectDB();
-//                                     connectCloudinary();
-// main()
-.then( () => {
-    console.log("successfull")
-})
-.catch((err) => console.log(err));
-
-async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/test')};
-
-
+connectDB();
+connectCloudinary();
 // middlewares
 app.use(express.json())
 app.use(cors())
