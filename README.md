@@ -52,13 +52,14 @@ cd shopping-apa
 
 
 ### 2. 🔧 Backend Setup (backend/)
+
 Install Dependencies
 
 cd backendv3
 npm install
 
 
-Create .env in backend/ directory
+### Create .env in backend/ directory
 
 PORT=8080
 # MongoDB
@@ -77,13 +78,13 @@ CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_SECRET_KEY=your_cloudinary_secret
 
 
-Start Backend Server
+### Start Backend Server
 
 npm run dev
 Server runs on: http://localhost:8080
 
 
-🎨 Frontend Setup (frontend/)
+### 🎨 Frontend Setup (frontend/)
 Install Dependencies
 
 cd frontendv3
