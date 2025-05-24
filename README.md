@@ -38,9 +38,7 @@ shopping-apa/
 ├── .env (for backend)
 └── README.md
 
-yaml
-Copy
-Edit
+
 
 ---
 
@@ -53,7 +51,7 @@ git clone https://github.com/yourusername/shopping-apa.git
 cd shopping-apa
 
 
-🔧 Backend Setup (backend/)
+### 2. 🔧 Backend Setup (backend/)
 Install Dependencies
 
 cd backendv3
