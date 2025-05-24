@@ -38,20 +38,21 @@ npm install
 ```env
 PORT=8080
 
-# MongoDB
-mongodb_URI=mongodb+srv://MohammadShan:mohdshan1024@cluster0.octcz7h.mongodb.net
+# MongoDB URI
+MONGODB_URI=your_mongodb_connection_string
 
-# JWT
-jwtSecret=MohammadShan
+# JWT Secret
+jwtSecret=your_jwt_secret_key
 
-# Cloudinary
-CLOUDINARY_API_KEY=743444166555646
-CLOUDINARY_SECRET_KEY=thd_J4cC4yHYP_ngbbKS75FMSXO
-CLOUDINARY_NAME=clouddevs
+# Admin credentials
+admin_Email=admin@example.com
+admin_Password=your_admin_password
 
-# Admin Credentials
-admin_Email=mohdshan1024@gmail.com
-admin_Password=mynameisshan
+# Cloudinary Credentials
+CLOUDINARY_NAME=your_cloudinary_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_SECRET_KEY=your_cloudinary_secret
+
 ```
 
 To start the backend server:
