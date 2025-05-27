@@ -8,11 +8,11 @@ const Orders = ({ token }) => {
   const [orders, setOrders] = useState([]);
 
   const fetchAllOrders = async () => {
-    if (!token) return;
+    if (!token) return null;
 
     try {
       const response = await axios.post(
-        `${backendUrl}api/order/list`,
+        `${backendUrl}/api/order/list`,
         {},
         { headers: { token } }
       );
