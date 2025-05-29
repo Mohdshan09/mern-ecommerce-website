@@ -8,6 +8,7 @@ const Cart = () => {
   const { products, cartItems, currency, updateQuantity, navigate } =
     useContext(ShopContext);
   const [cartData, setcartData] = useState([]);
+  console.log("products",products.data);
 
   useEffect(() => {
     const tempData = [];
@@ -41,6 +42,7 @@ const Cart = () => {
           const productData = products.find(
             (product) => product._id === item._id
           );
+          console.log(productData.images[0])
 
           return (
             <div
