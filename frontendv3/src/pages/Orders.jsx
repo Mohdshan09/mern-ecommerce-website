@@ -18,6 +18,7 @@ const Orders = () => {
         {},
         { headers: { token } }
       );
+      console.log(response);
       if (response.data.success) {
         const orderItems = [];
         response.data.orders.map((order) => {
@@ -34,7 +35,9 @@ const Orders = () => {
 
         setOrderData(orderItems.reverse());
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
