@@ -1,7 +1,6 @@
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 import Stripe from "stripe";
-import razorpay from "razorpay";
 
 //payment-gateway
 const stripe = new Stripe(process.env.stripeKey);
@@ -65,19 +64,63 @@ const placeOrderStripe = async (req, res) => {
       quantity: item.quantity,
     }));
 
-//     line_Items.push({
-//       price_data: {
-//         currency: currency,
-//         product_data: {
-//           name: 'Deleivery Chargest',
-//         },
-//         unit_amount: item.price * 100,
-//       },
-//       quantity: item.quantity,
-//     })
-//   } catch (error) {}
-// };
+    line_items.push({
+      price_data: {
+        currency: currency,
+        product_data: {
+          name: "Deleivery Chargest",
+        },
+        unit_amount: deleiveryCharge * 100,
+      },
+      quantity: 1,
+    });
 
+    const session = await stripe.checkout.sessions.create({
+      success_url: `${origin}/verify?success=true&orderId=${newOrder._id}`,
+      cancel_url: `${origin}/verify?success=false&orderId=${newOrder._id}`,
+      line_items,
+      mode: "payment",
+    });
+
+    res.json({
+      success: true,
+      session_url: session.url,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      response: error.message,
+    });
+  }
+};
+
+    
+const verifyStripe = async (req, res) => {
+  const { orderId, success, userId } = req.body;
+
+  try {
+    if (success === "true") {
+      await orderModel.findByIdAndUpdate(orderId, { payment: "true" });
+      await userModel.findByIdAndUpdate(userId, { cartData: {} });
+      res.json({
+        success: true,
+      });
+    } else {
+      await orderModel.findByIdAndDelete(orderId);
+
+      res.json({
+        success: false,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 // Placing orders using Razorpay method
 const placeOrderRazorpay = async (req, res) => {
 
