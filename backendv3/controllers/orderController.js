@@ -31,48 +31,66 @@ const placeOrder = async (req, res) => {
 };
 
 // Placing orders using stripe method
-// const placeOrderStripe = async (req, res) => {
-//   try {
-//     const { userId, items, amount, address } = req.body;
+const placeOrderStripe = async (req, res) => {
+  try {
+    const { userId, items, amount, address } = req.body;
 
-//     const { origin } = req.headers;
+    const { origin } = req.headers;
 
-//     const orderData = {
-//       userId,
-//       items,
-//       amount,
-//       address,
-//       paymentMethod: "Stripe",
-//       payment: false,
-//       date: Date.now(),
-//     };
+    const orderData = {
+      userId,
+      items,
+      amount,
+      address,
+      paymentMethod: "Stripe",
+      payment: false,
+      date: Date.now(),
+    };
 
-//     const newOrder = new orderModel(orderData);
-//     await newOrder.save();
+    const newOrder = new orderModel(orderData);
+    await newOrder.save();
 
-//     const line_Items = items.map((item) => ({
-//       price_data: {
-//         currency: currency,
-//         product_data: {
-//           name: item.name,
-//         },
-//         unit_amount: item.price * 100,
-//       },
-//       quantity: item.quantity,
-//     }));
+    const line_items = items.map((item) => ({
+      price_data: {
+        currency: currency,
+        product_data: {
+          name: item.name,
+        },
+        unit_amount: item.price * 100,
+      },
+      quantity: item.quantity,
+    }));
 
-//     line_Items.push({
-//       price_data: {
-//         currency: currency,
-//         product_data: {
-//           name: 'Deleivery Chargest',
-//         },
-//         unit_amount: item.price * 100,
-//       },
-//       quantity: item.quantity,
-//     })
-//   } catch (error) {}
-// };
+    line_items.push({
+      price_data: {
+        currency: currency,
+        product_data: {
+          name: "Deleivery Chargest",
+        },
+        unit_amount: deleiveryCharge * 100,
+      },
+      quantity: 1,
+    });
+
+    const session = await stripe.checkout.sessions.create({
+      success_url: `${origin}/verify?success=true&orderId=${newOrder._id}`,
+      cancel_url: `${origin}/verify?success=false&orderId=${newOrder._id}`,
+      line_items,
+      mode: "payment",
+    });
+
+    res.json({
+      success: true,
+      session_url: session.url,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      response: error.message,
+    });
+  }
+};
 
 // Placing orders using Razorpay method
 const placeOrderRazorpay = async (req, res) => {};
