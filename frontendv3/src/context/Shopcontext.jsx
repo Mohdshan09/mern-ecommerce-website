@@ -13,7 +13,7 @@ export const ShopContextProvider = ({ children }) => {
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
-  const [products, setProducts] = useState([]);
+  const [products, setProductData] = useState([]);
   const navigate = useNavigate();
   const [token, setToken] = useState("");
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -23,7 +23,7 @@ export const ShopContextProvider = ({ children }) => {
       toast.error("Select Product Size");
       return;
     }
-    const mycartData = structuredClone(cartItems);
+    const mycartData = structuredClone(cartItems || {});
 
     if (mycartData[itemId]) {
       if (mycartData[itemId][size]) {
@@ -34,6 +34,11 @@ export const ShopContextProvider = ({ children }) => {
     } else {
       mycartData[itemId] = {};
       mycartData[itemId][size] = 1;
+    }
+
+    if (!itemId) {
+      console.error("Item ID is missing");
+      return;
     }
 
     setCartItems(mycartData);
@@ -103,7 +108,7 @@ export const ShopContextProvider = ({ children }) => {
             totalAmount += itemInfo.price * cartItems[items][item];
           }
         } catch (err) {
-          console.log("error !");
+          console.log(err.message);
         }
       }
     }
@@ -115,8 +120,7 @@ export const ShopContextProvider = ({ children }) => {
     try {
       const response = await axios.get(backendUrl + "/api/product/list");
       if (response.data.success) {
-        console.log(response.data);
-        setProducts(response.data.products);
+        setProductData(response.data.products);
       } else {
         toast.error(response.data.message);
       }
@@ -148,11 +152,16 @@ export const ShopContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    console.log("useEffect: ",products)
+  }, [products]);
+
+
+  useEffect(() => {
     if (!token && localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
       getUserCart(localStorage.getItem("token"));
     }
-  });
+  },[]);
 
   const value = {
     products,

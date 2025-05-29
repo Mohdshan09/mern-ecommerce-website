@@ -25,11 +25,16 @@ const Cart = () => {
     }
 
     setcartData(tempData);
-  }, [cartItems,products]);
+  }, [cartItems, products]);
 
-  if (!products || products.length === 0) {
-    return <p>Loading products...</p>;
+  useEffect(() => {
+    console.log("Products in Cart.jsx:", products);
+  }, [products]);
+
+  if (!Array.isArray(products) || products.length === 0) {
+    return <p>Loading products...</p>; // Better: use a spinner or skeleton
   }
+
   return (
     <div className="border-t pt-14">
       <div className="text-2xl mb-3">
@@ -41,6 +46,10 @@ const Cart = () => {
           const productData = products.find(
             (product) => product._id === item._id
           );
+          if (!productData) return null; // Skip if product doesn't exist
+
+          console.log("Matching ID:", item._id);
+          console.log("Found Product:", productData);
 
           return (
             <div

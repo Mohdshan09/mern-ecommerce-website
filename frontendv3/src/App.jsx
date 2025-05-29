@@ -15,6 +15,7 @@ import {
   Orders,
   Placeorder,
   Product,
+  Verify
 } from "./pages/source.js";
 import Footer from "./components/Footer.jsx";
 
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/place-order" element={<Placeorder />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/verify" element={<Verify/>}/>
       </Routes>
       <Footer />
     </div>
