@@ -1,9 +1,11 @@
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 import Stripe from "stripe";
+import razorpay from "razorpay";
 
 //payment-gateway
 const stripe = new Stripe(process.env.stripeKey);
+// const razorpayInstance = new razorpay() 
 
 const currency = "inr";
 const deleiveryCharge = 10;
@@ -120,7 +122,9 @@ const verifyStripe = async (req, res) => {
   }
 };
 // Placing orders using Razorpay method
-const placeOrderRazorpay = async (req, res) => {};
+const placeOrderRazorpay = async (req, res) => {
+
+};
 
 // All orders data for admin panel
 const allOrders = async (req, res) => {
