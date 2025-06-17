@@ -97,9 +97,9 @@ To run the admin dashboard:
 npm start
 ```
 
-Login to admin dashboard using credentials:
-- **Email**: `mohdshan1024@gmail.com`
-- **Password**: `mynameisshan`
+Login to admin dashboard using credentials add .env:
+- **Email**: `your adminEmail`
+- **Password**: `your admin password`
 
 ---
 
