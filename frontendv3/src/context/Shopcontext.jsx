@@ -14,11 +14,26 @@ export const ShopContextProvider = ({ children }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
   const [products, setProductData] = useState([]);
+  const [productsLoading, setProductsLoading] = useState(true);
   const navigate = useNavigate();
   const [token, setToken] = useState("");
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
+  const requireAuth = () => {
+    if (token || localStorage.getItem("token")) {
+      return true;
+    }
+
+    toast.error("Please login to continue");
+    navigate("/login");
+    return false;
+  };
+
   const addToCart = async (itemId, size) => {
+    if (!requireAuth()) {
+      return;
+    }
+
     if (!size) {
       toast.error("Select Product Size");
       return;
@@ -66,7 +81,7 @@ export const ShopContextProvider = ({ children }) => {
             totalCount += cartItems[items][item];
           }
         } catch (err) {
-          console.log("Error occured !");
+          console.log("Error occured !" + err);
         }
       }
     }
@@ -75,6 +90,10 @@ export const ShopContextProvider = ({ children }) => {
   };
 
   const updateQuantity = async (itemId, size, quantity) => {
+    if (!requireAuth()) {
+      return;
+    }
+
     const mycartData = structuredClone(cartItems);
     mycartData[itemId][size] = quantity;
 
@@ -117,6 +136,7 @@ export const ShopContextProvider = ({ children }) => {
   };
 
   const getProductsData = async () => {
+    setProductsLoading(true);
     try {
       const response = await axios.get(backendUrl + "/api/product/list");
       if (response.data.success) {
@@ -127,6 +147,8 @@ export const ShopContextProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
       toast.error(error.message);
+    } finally {
+      setProductsLoading(false);
     }
   };
 
@@ -152,7 +174,7 @@ export const ShopContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    console.log("useEffect: ",products)
+    console.log("useEffect: ", products)
   }, [products]);
 
 
@@ -161,10 +183,11 @@ export const ShopContextProvider = ({ children }) => {
       setToken(localStorage.getItem("token"));
       getUserCart(localStorage.getItem("token"));
     }
-  },[]);
+  }, []);
 
   const value = {
     products,
+    productsLoading,
     deliveryFee,
     currency,
     search,
@@ -174,6 +197,7 @@ export const ShopContextProvider = ({ children }) => {
     cartItems,
     setCartItems,
     addToCart,
+    requireAuth,
     getcartCount,
     updateQuantity,
     totalcartAmount,

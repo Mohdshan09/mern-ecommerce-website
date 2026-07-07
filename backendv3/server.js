@@ -11,8 +11,8 @@ import orderRouter from './routes/orderRoute.js'
 //App config
 const app = express()
 const port = process.env.PORT || 4000
-connectDB();
 connectCloudinary();
+
 // middlewares
 app.use(express.json())
 app.use(cors())
@@ -26,4 +26,15 @@ app.get('/', (req, res) => {
     res.send("API working")
 })
 
-app.listen(port, ()=> console.log('Server started on port: ' + port));
+const startServer = async() => {
+    try {
+        await connectDB();
+        app.listen(port, ()=> console.log('Server started on port: ' + port));
+    } catch (error) {
+        console.error('Failed to connect to MongoDB:', error.message);
+        console.error('Check your MongoDB URI, Atlas Network Access IP allowlist, and whether port 27017 is blocked.');
+        process.exit(1);
+    }
+}
+
+startServer();

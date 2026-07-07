@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Title from "../components/Title";
 import CartTotal from "../components/CartTotal";
 import { assets } from "../assets/assets";
@@ -28,7 +28,12 @@ const Placeorder = () => {
     totalcartAmount,
     deliveryFee,
     products,
+    requireAuth,
   } = useContext(ShopContext);
+
+  useEffect(() => {
+    requireAuth();
+  }, [token]);
 
   const onchangeHandler = (e) => {
     const name = e.target.name;
@@ -39,6 +44,10 @@ const Placeorder = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+
+    if (!requireAuth()) {
+      return;
+    }
 
     try {
       let orderItems = [];

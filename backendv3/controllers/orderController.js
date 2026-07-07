@@ -3,7 +3,7 @@ import userModel from "../models/userModel.js";
 import Stripe from "stripe";
 
 //payment-gateway
-const stripe = new Stripe(process.env.stripeKey);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 // const razorpayInstance = new razorpay() 
 
 const currency = "inr";
@@ -95,7 +95,7 @@ const placeOrderStripe = async (req, res) => {
   }
 };
 
-    
+
 const verifyStripe = async (req, res) => {
   const { orderId, success, userId } = req.body;
 

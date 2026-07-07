@@ -5,7 +5,7 @@ import { assets } from "../assets/assets";
 import CartTotal from "../components/CartTotal";
 
 const Cart = () => {
-  const { products, cartItems, currency, updateQuantity, navigate } =
+  const { products, cartItems, currency, updateQuantity, navigate, requireAuth } =
     useContext(ShopContext);
   const [cartData, setcartData] = useState([]);
 
@@ -108,7 +108,11 @@ const Cart = () => {
 
           <div className="w-full text-end">
             <button
-              onClick={() => navigate("/place-order")}
+              onClick={() => {
+                if (requireAuth()) {
+                  navigate("/place-order");
+                }
+              }}
               className="bg-black text-white text-sm my-8 px-8 py-3 cursor-pointer"
             >
               PROCEED TO CHECKOUT

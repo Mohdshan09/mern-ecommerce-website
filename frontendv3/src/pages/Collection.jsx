@@ -6,7 +6,7 @@ import Title from "../components/Title";
 import ProductItems from "../components/ProductItems";
 
 const Collection = () => {
-  const { products, search, showSearch } = useContext(ShopContext);
+  const { products, productsLoading, search, showSearch } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProduct, setfilterProduct] = useState([]);
   const [category, setCategory] = useState([]);
@@ -183,18 +183,28 @@ const Collection = () => {
           </select>
         </div>
 
-        {/* Map products */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
-          {filterProduct.map((item, index) => (
-            <ProductItems
-              key={index}
-              name={item.name}
-              id={item._id}
-              image={item.images}
-              price={item.price}
-            />
-          ))}
-        </div>
+        {productsLoading ? (
+          <div className="flex min-h-[320px] flex-col items-center justify-center gap-4">
+            <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-gray-800"></div>
+            <p className="text-sm text-gray-500">Loading collection...</p>
+          </div>
+        ) : filterProduct.length === 0 ? (
+          <div className="flex min-h-[320px] items-center justify-center text-sm text-gray-500">
+            No products found.
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
+            {filterProduct.map((item, index) => (
+              <ProductItems
+                key={item._id || index}
+                name={item.name}
+                id={item._id}
+                image={item.images}
+                price={item.price}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
