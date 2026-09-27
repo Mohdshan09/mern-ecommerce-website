@@ -112,16 +112,13 @@ const Product = () => {
 
         <div className="flex flex-col gap-4 border border-gray-300 px-6 py-6 text-sm text-gray-500">
           <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam
-            aspernatur tenetur itaque maxime voluptatibus libero dolorum est
-            sint, aut praesentium optio magnam temporibus quidem velit eum
-            laudantium reprehenderit cum. Excepturi?
+            {productData.description}
           </p>
           <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem
-            praesentium fugiat tenetur vero! Iusto ab aspernatur vitae libero
-            quaerat, consequatur earum nobis ipsa omnis blanditiis nemo
-            adipisci, officia quidem at!
+            Please check the size guide before ordering. For best results,
+            follow the care instructions on the label: wash with similar
+            colours and avoid high heat when drying or ironing. Every order is
+            covered by our easy 7-day return and exchange policy.
           </p>
         </div>
       </div>

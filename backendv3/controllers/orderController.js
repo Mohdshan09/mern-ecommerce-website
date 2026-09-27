@@ -7,7 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 // const razorpayInstance = new razorpay() 
 
 const currency = "inr";
-const deleiveryCharge = 10;
+const deleiveryCharge = 49;
 
 const placeOrder = async (req, res) => {
   try {

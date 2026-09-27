@@ -123,7 +123,7 @@ const Collection = () => {
                 onChange={toggleCategory}
                 type="checkbox"
                 className="w-3"
-                value={"Men"}
+                value={"Kids"}
               />
               Kids
             </p>

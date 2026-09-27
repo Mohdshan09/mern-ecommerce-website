@@ -17,23 +17,23 @@ const About = () => {
         />
         <div className="flex flex-col justify-center gap-6 md:w-2/4 text-gray-600">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut impedit
-            nostrum eligendi doloremque. Ipsam nemo ea sit dolor nostrum
-            corporis qui, vel iure neque suscipit, delectus voluptates natus
-            vitae quos.
+            Forever was born out of a simple idea: everyday clothing should be
+            comfortable, well made and easy to buy. What started as a small
+            passion project has grown into an online store offering carefully
+            selected apparel for men, women and kids.
           </p>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-            sunt fugit ea quibusdam accusantium dolorum natus voluptatem
-            exercitationem, deserunt consequatur quam expedita, ut reiciendis
-            molestiae molestias quia alias est saepe.
+            From breathable cotton tees and tailored trousers to warm jackets
+            for the colder months, every piece in our collection is chosen for
+            its fabric, fit and durability. We keep adding new styles so you
+            can always find something that suits your wardrobe and your budget.
           </p>
           <b className="text-gray-800">Our Mission</b>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
-            corrupti, fugiat quasi explicabo porro corporis nihil accusantium.
-            Totam nemo ratione iusto soluta animi, vero ipsum consectetur
-            provident libero repellendus! Error.
+            Our mission is to make good quality fashion accessible to everyone.
+            We want shopping with us to be simple and trustworthy, from browsing
+            the collection and choosing your size to secure checkout, fast
+            delivery and easy returns.
           </p>
         </div>
       </div>
@@ -46,28 +46,27 @@ const About = () => {
         <div className="border border-gray-300 px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5 ">
           <b>Quality Assurance:</b>
           <p className="text-gray-500">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius
-            numquam iste enim temporibus quos, consectetur tempora magnam
-            reprehenderit cum voluptatum quas aliquid, illo veniam quaerat
-            nesciunt voluptas? Necessitatibus, adipisci unde.
+            Every product is checked for fabric quality, stitching and fit
+            before it reaches our store. We only list clothing we would be
+            happy to wear ourselves.
           </p>
         </div>
 
         <div className="border border-gray-300 px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5 ">
           <b>Convenience:</b>
           <p className="text-gray-500">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius
-            numquam iste enim temporibus quos, consectetur tempora magnam
-            reprehenderit cum voluptatum quas aliquid, illo veniam quaerat
-            nesciunt voluptas? Necessitatibus, adipisci unde.
+            Browse by category, filter by style, pay online or with cash on
+            delivery, and track your orders from your account, all in a few
+            clicks.
           </p>
         </div>
 
         <div className="border border-gray-300 px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5 ">
           <b>Exceptional Customer Service:</b>
           <p className="text-gray-500">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius
-            numquam iste enim temporibus quos, consectetur tempora magna
+            Have a question about sizing, an order or a return? Our support
+            team is always ready to help and will get back to you as quickly as
+            possible.
           </p>
         </div>
       </div>

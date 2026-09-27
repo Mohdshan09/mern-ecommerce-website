@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import SearchBar from "./components/SearchBar.jsx";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import {
@@ -15,16 +15,17 @@ import {
   Orders,
   Placeorder,
   Product,
-  Verify
+  Verify,
+  PrivacyPolicy
 } from "./pages/source.js";
 import Footer from "./components/Footer.jsx";
 
 const App = () => {
   return (
     <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
-      <ToastContainer/>
+      <ToastContainer />
       <Navbar />
-      <SearchBar/>
+      <SearchBar />
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -36,7 +37,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/place-order" element={<Placeorder />} />
         <Route path="/orders" element={<Orders />} />
-        <Route path="/verify" element={<Verify/>}/>
+        <Route path="/verify" element={<Verify />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
       <Footer />
     </div>

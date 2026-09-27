@@ -11,7 +11,7 @@ const ProductItems = ({ id, image, name, price }) => {
       <Link to={`/products/${id}`} className="text-gray-700 cursor-pointer">
         <div className="overflow-hidden">
           <img
-            src={image}
+            src={Array.isArray(image) ? image[0] : image}
             alt="prod-1"
             className="hover:scale-110 transition ease-in-out"
           />

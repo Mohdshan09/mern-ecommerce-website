@@ -3,7 +3,7 @@ import { ShopContext } from "../context/Shopcontext";
 import Title from "./Title";
 
 const CartTotal = () => {
-  const { totalcartAmount, currency, delivery_fee } = useContext(ShopContext);
+  const { totalcartAmount, currency, deliveryFee } = useContext(ShopContext);
   return (
     <div className="w-full">
       <div className="text-2xl">
@@ -23,7 +23,7 @@ const CartTotal = () => {
           <p>Shipping Fee</p>
           <p>
             {currency}
-            10.00
+            {deliveryFee}.00
           </p>
         </div>
         <hr />
@@ -32,7 +32,7 @@ const CartTotal = () => {
           <b>Total</b>
           <b>
             {currency}{" "}
-            {totalcartAmount() === 0 ? 0 : totalcartAmount() + 10}.00
+            {totalcartAmount() === 0 ? 0 : totalcartAmount() + deliveryFee}.00
           </b>
         </div>
       </div>
